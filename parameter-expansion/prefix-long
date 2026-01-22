@@ -1,0 +1,2 @@
+filepath="backup.2024.tar.gz"
+echo "${filepath%%.*}"
