@@ -1,0 +1,8 @@
+#!/bin/bash
+get_extension() {
+    filename="$1"
+    echo "${filename##*.}"
+}
+
+ext=$(get_extension "$1")
+echo "$ext"
