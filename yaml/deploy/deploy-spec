@@ -1,0 +1,13 @@
+spec:
+  template:
+    metadata:
+      labels:
+        tier: backend
+    spec:
+      containers:
+      - image: redis:7
+        name: redis
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: backend

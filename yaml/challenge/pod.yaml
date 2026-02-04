@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-app
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    env:
+    - name: SERVER_NAME
+      valueFrom:
+        configMapKeyRef:
+          name: web-config
+          key: SERVER_NAME
+    - name: PORT
+      valueFrom:
+        configMapKeyRef:
+          name: web-config
+          key: PORT
+    envFrom:
+    - secretRef:
+        name: web-creds
+    volumeMounts:
+    - name: web-config
+      mountPath: /etc/config
+    - name: web-creds
+      mountPath: /etc/secrets
+  volumes:
+  - name: web-config
+    configMap:
+      name: web-config
+  - name: web-creds
+    secret:
+      secretName: web-creds
+

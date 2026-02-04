@@ -1,0 +1,7 @@
+env:
+- name: APP_ENV
+  valueFrom:
+    configMapKeyRef:
+      name: app-config
+      key: APP_ENV
+

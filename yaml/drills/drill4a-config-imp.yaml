@@ -1,0 +1,1 @@
+k create cm app-config --from-literal APP_ENV=prod --from-literal LOG_LEVEL=info
