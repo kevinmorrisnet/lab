@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io
+kind: NetworkPolicy
+metadata:
+  name: allow-from-office
+spec:
+  podSelector:
+    matchLabels:
+      app: admin
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 10.50.0.0/16
+        except:
+        - 10.50.10.5/32
+    ports:
+    - protocol: TCP
+      port: 443
+

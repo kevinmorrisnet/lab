@@ -1,0 +1,5 @@
+ingress:
+- from:
+  - namespaceSelector:
+      matchLabels:
+        name: prod          # Allow from 'prod' namespace

@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: policy-name
+  namespace: default
+spec:
+  podSelector:              # Which Pods does this apply to?
+    matchLabels:
+      app: database
+
+  policyTypes:              # What are we controlling? (REQUIRED)
+  - Ingress
+  - Egress
+
+  ingress:                  # Rules for incoming traffic
+  - from:                   # WHO can connect?
+    - podSelector:
+        matchLabels:
+          app: backend
+    ports:                  # On which PORTS?
+    - protocol: TCP
+      port: 5432
+
+  egress:                   # Rules for outgoing traffic
+  - to:                     # WHERE can it connect?
+    - podSelector:
+        matchLabels:
+          app: logging
+    ports:
+    - protocol: TCP
+      port: 9200

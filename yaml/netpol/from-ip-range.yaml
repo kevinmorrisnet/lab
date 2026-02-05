@@ -1,0 +1,6 @@
+ingress:
+- from:
+  - ipBlock:
+      cidr: 192.168.1.0/24
+      except:
+      - 192.168.1.5/32      # All IPs except this one

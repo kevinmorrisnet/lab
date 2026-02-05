@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: my-cronjob
+spec:
+  jobTemplate:
+    metadata:
+      name: my-cronjob
+    spec:
+      template:
+        metadata: {}
+        spec:
+          containers:
+          - image: busybox
+            name: my-cronjob
+  schedule: '*/15 * * * *'
