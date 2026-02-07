@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: class-ingress
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - secure.web.io
+    secretName: web-cert
+  rules:
+  - host: secure.web.io
+    http:
+      paths:
+      - path: /app
+        pathType: Prefix
+        backend:
+          service:
+            name: app-svc
+            port:
+              number: 9000
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-svc
+            port:
+              number: 8080
+

@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+spec:
+  rules:
+  - host: blog.example.org
+    http:
+    paths:
+    - path: /posts
+      pathType: Prefix
+      backend:
+        service:
+          name: blog-service
+          port:
+            number: 5000

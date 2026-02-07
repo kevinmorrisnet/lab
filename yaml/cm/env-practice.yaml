@@ -1,0 +1,34 @@
+envFrom:
+- configMapRef:
+    name: app-config
+
+
+volumes:
+- name: secret-vol
+  secret:
+    secretName: db-creds
+
+
+env:
+- name: API_KEY
+  valueFrom:
+    secretKeyRef:
+      name: api-secret
+      key: API_KEY
+
+
+
+spec:
+  containers:
+  - image: nginx
+    name: app
+    envFrom:
+    - configMapRef:
+        name: app-config
+    volumeMounts:
+      name: tls-certs
+      mountPath: /etc/ssl
+  volumes:
+  - name: tls-certs
+    secret:
+      secretName: tls-certs

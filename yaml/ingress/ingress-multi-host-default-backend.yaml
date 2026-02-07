@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: default-backend-ingress
+spec:
+  defaultBackend:
+    service:
+      name: 404-svc
+      port:
+        number: 80
+  rules:
+  - host: shop.example.com
+    http:
+      paths:
+      - path: /products
+        pathType: Prefix
+        backend:
+          service:
+            name: products-svc
+            port:
+              number: 8080
+      - path: /cart
+        pathType: Prefix
+        backend:
+          service:
+            name: cart-svc
+            port:
+              number: 8080
+
+
+

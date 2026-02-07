@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: docs-ingress
+spec:
+  rules:
+    - host: docs.tech.io
+      http:
+        paths:
+        - path: /guide
+          pathType: Prefix
+          backend:
+            service:
+              name: documentation
+              port:
+                number: 9000
+        - path: /api
+          pathType: Prefix
+          backend:
+            service:
+              name: api-docs
+              port:
+                number: 8080

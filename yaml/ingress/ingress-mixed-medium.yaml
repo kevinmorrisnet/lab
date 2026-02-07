@@ -1,0 +1,67 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: complex-ingress
+spec:
+  defaultBackend:
+    service:
+      name: homepage-svc
+      port:
+        number: 80
+  rules:
+  - host: store.example.com
+    http:
+      paths:
+      - path: /electronics
+        pathType: Prefix
+        backend:
+          service:
+            name: electronics-svc
+            port:
+              number: 9000
+      - path: /clothing
+        pathType: Prefix
+        backend:
+          service:
+            name: clothing-svc
+            port:
+              number: 9000
+      - path: /books
+        pathType: Prefix
+        backend:
+          service:
+            name: books-svc
+            port:
+              number: 9000
+  - host: admin.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-svc
+            port:
+              number: 3000
+  - host: support.example.com
+    http:
+      paths:
+      - path: /tickets
+        pathType: Prefix
+        backend:
+          service:
+            name: ticket-svc
+            port:
+              number: 8080
+      - path: /chat
+        pathType: Prefix
+        backend:
+          service:
+            name: chat-svc
+            port:
+              number: 8080
+
+
+
+
+

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: exact-match-ingress
+spec:
+  rules:
+  - host: app.io
+    http:
+      paths:
+      - path: /api
+        pathType: Exact
+        backend:
+          service:
+            name: api-svc
+            port:
+              number: 8080
+      - path: /api/v1
+        pathType: Prefix
+        backend:
+          service:
+            name: api-v1-svc
+            port:
+              number: 8080
+      - path: /
+        pathType: Exact
+        backend:
+          service:
+            name: root-svc
+            port:
+              number: 80
