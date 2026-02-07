@@ -1,0 +1,18 @@
+volumes:
+- name: config-vol
+  configMap:
+    name: app-config
+
+volumes:
+- name: secret-vol
+  secret:
+    secretName: db-credentials
+
+volumes:
+- name: pvc-vol
+  persistentVolumeClaim:
+    claimName: data-storage
+
+
+
+

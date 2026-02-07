@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-app
+spec:
+  containers:
+  - image: nginx:alpine
+    name: web-app
+    env:
+    - name: APP_MODE
+      valueFrom:
+        configMapKeyRef:
+          name: app-settings
+          key: mode
+    - name: LOG_LEVEL
+      valueFrom:
+        configMapKeyRef:
+          name: app-settings
+          key: log_level
+    volumeMounts:
+    - name: config-vol
+      mountPath: /etc/nginx/conf.d
+  volumes:
+  - name: config-vol
+    configMap:
+      name: nginx-conf
+
+
+
+
