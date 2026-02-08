@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: netadmin-pod
+spec:
+  containers:
+  - image: nginx
+    name: netadmin-pod
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+        add:
+        - NET_ADMIN

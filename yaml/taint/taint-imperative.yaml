@@ -1,0 +1,1 @@
+k taint node worker1 tier=frontend:NoSchedule

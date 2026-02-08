@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: api-pod
+spec:
+  serviceAccountName: app-sa
+  containers:
+  - image: nginx
+    name: api-pod
