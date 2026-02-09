@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: final-priv-pod
+spec:
+  securityContext:
+    runAsUser: 1500
+    fsGroup: 2500
+  containers:
+  - image: busybox
+    name: final-priv-pod
+    command: ["sleep","3600"]
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-monitor
+spec:
+  containers:
+  - image: nginx
+    name: app
+  - image: busybox
+    name: monitor
+    command: ["sh", "-c", "while true; do echo monitoring app; sleep 10; done"]
+  - image: alpine
+    name: logger
+    command: ["sh", "-c", "tail -f /dev/null"]

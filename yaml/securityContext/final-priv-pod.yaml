@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: max-secure
+spec:
+  containers:
+  - image: nginx
+    name: max-secure
+    securityContext:
+      runAsUser: 2000
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true

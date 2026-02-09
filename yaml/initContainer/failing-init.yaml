@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-with-resources
+spec:
+  initContainers:
+  - image: busybox:1.28
+    name: heavy-setup
+    command: ["sh", "-c", "sleep 10"]
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+  containers:
+  - image: nginx:alpine
+    name: lightweight-app
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi

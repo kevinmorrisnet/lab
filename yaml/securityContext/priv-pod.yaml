@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: priv-pod
+spec:
+  containers:
+  - image: alpine
+    name: priv-pod
+    command: ["sleep", "3600"]
+    securityContext:
+      privileged: true
+

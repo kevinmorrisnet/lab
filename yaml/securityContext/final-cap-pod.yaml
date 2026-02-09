@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: final-cap-pod
+spec:
+  securityContext:
+    fsGroup: 5000
+  containers:
+  - image: redis
+    name: final-cap-pod
+    securityContext:
+      capabilities:
+        drop:
+        - CHOWN
+        - DAC_OVERRIDE
+        - SETUID
+        add:
+          - NET_ADMIN
+          - SYS_TIME
+      allowPrivilegeEscalation: false
+

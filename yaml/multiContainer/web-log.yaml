@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-log
+spec:
+  containers:
+  - image: nginx
+    name: web
+  - image: busybox
+    name: logger
+    command: ["sh", "-c", "while true; do echo logging; sleep 5; done"]

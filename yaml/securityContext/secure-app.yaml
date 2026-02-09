@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: group-pod
+spec:
+  securityContext:
+    runAsUser: 1500
+    runAsGroup: 2500
+    fsGroup: 3500
+  containers:
+  - image: alpine
+    name: group-pod
+    command: ["sleep", "3600"]
+

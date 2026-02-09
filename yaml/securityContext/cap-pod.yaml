@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: netadmin-pod
+spec:
+  containers:
+  - image: alpine
+    name: netadmin-pod
+    command: ["sleep","3600"]
+    securityContext:
+      capabilities:
+        drop:
+          - ALL
+        add:
+          - NET_ADMIN

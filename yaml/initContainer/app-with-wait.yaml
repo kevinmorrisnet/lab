@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-wait
+  namespace: default
+spec:
+  initContainers:
+  - image: busybox:1.28
+    name: wait-redis
+    command: ["sh", "-c", "until nslookup redis-service; do sleep 2; done"]
+  - image: busybox:1.28
+    name: wait-mysql
+    command: ["sh", "-c", "until nslookup mysql-service; do sleep 2; done"]
+  containers:
+  - image: nginx:1.21
+    name: application
+    env:
+    - name: APP_MODE
+      value: production

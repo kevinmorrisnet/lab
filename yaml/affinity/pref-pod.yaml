@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pref-pod
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          :wmatchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - ssd
+  containers:
+  - image: nginx
+    name: pref-pod
+

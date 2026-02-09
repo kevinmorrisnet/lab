@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nonroot-pod
+spec:
+  containers:
+  - image: redis
+    name: nonroot-pod
+    securityContext:
+      runAsUser: 2000
+      runAsNonRoot: true

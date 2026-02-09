@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-cap
+spec:
+  containers:
+  - image: httpd
+    name: web-cap
+    securityContext:
+      capabilities:
+        drop:
+          - CHOWN
+          - SETUID
+          - SETGID
+        add:
+          - NET_BIND_SERVICE
+
