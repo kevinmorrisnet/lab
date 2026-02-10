@@ -1,0 +1,7 @@
+apiVersion: storage.kubernetes.io/v1
+kind: StorageClass
+metadata:
+  name: standard
+provisioner: rancher.io/local-path
+reclaimPolicy: Delete
+
