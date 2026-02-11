@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sidecar-pod
+spec:
+  containers:
+  - image: nginx:latest
+    name: web
+  - image: busybox:latest
+    name: logger
+    command: ["sh", "-c", "while true; do sleep 30; done"]

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cassandra-svc
+  namespace: data
+spec:
+  clusterIP: None
+  selector:
+    app: cassandra
+    cluster: prod
+  ports:
+  - port: 9042
+    targetPort: 9042

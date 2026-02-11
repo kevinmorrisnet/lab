@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cassandra
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: cassandra
+  serviceName: cassandra-svc
+  template:
+    metadata:
+      labels:
+        app: cassandra
+    spec:
+      containers:
+      - image: cassandra:4
+        name: cassandra
+        ports:
+        - containerPort: 9042
+        env:
+        - name: MAX_HEAP_SIZE
+          value: 512M
+        volumeMounts:
+        - name: cassandra-data
+          mountPath: /var/lib/cassandra
+  volumeClaimTemplates:
+  - metadata:
+      name: cassandra-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 20Gi
+      storageClassName: fast-storage
