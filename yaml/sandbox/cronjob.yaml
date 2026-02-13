@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: daily-backup
+spec:
+  template:
+    schedule: "* 2 * * *"
+    spec:
+      containers:
+      - image: backup:v1
+        name: daily-backup
+
+
+          this was bad
+

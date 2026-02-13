@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-settings
+data:
+  API_URL: https://api.example.com
+  TIMEOUT: "30"
+  RETRY_COUNT: "3"
