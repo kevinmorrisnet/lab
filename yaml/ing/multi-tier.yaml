@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: multi-tier
+  namespace: platform
+spec:
+  podSelector:
+    matchLabels:
+      component: cache
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: api
+    - namespaceSelector:
+        matchLabels:
+          env: staging
+    ports:
+    - protocol: TCP
+      port: 6380

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: external-partners
+  namespace: apis
+spec:
+  podSelector:
+    matchLabels:
+      expose: public
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 198.51.100.0/24
+        except:
+        - 198.51.100.10/32
+        - 198.51.100.20/32
+    ports:
+    - protocol: TCP
+      port: 9443

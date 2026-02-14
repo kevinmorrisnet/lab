@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: hybrid-access
+  namespace: middleware
+spec:
+  podSelector:
+    matchLabels:
+      type: queue
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          worker: consumer
+    - namespaceSelector:
+        matchLabels:
+          ops: true
+    ports:
+    - protocol: TCP
+      port: 5672
+
