@@ -1,0 +1,1 @@
+k create clusterrole node-reader --resource nodes --verb get,list,watch

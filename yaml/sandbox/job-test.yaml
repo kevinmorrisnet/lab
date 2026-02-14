@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backup-job
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      containers:
+      - image: busybox
+        name: backup-job
+        command: ["sh", "-c", "echo backup complete"]
+      restartPolicy: Never

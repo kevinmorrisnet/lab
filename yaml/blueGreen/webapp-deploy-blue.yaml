@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: webapp
+        version: blue
+    spec:
+      containers:
+      - image: nginx:1.21
+        name: webapp-blue

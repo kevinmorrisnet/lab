@@ -1,0 +1,1 @@
+k create rolebinding deploy-admin -n dev --role deploy-manager --user kevin
