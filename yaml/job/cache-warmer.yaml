@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cache-warmer
+spec:
+  completions: 1
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+      - image: redis:7
+        name: cache-warmer
+        command: ["sh", "-c", "redis-cli -h cache.default.svc PING"]
+      restartPolicy: OnFailure

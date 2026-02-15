@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: api-test
+  namespace: testing
+spec:
+  completions: 50
+  parallelism: 10
+  activeDeadlineSeconds: 300
+  template:
+    spec:
+      containers:
+      - image: curl:latest
+        name: api-test
+        command: ["sh", "-c", "curl -X POST https://api.example.com/test -d '{\"status\":\"ok\"}' -H 'Content-Type: application/json'"]
+      restartPolicy: Never

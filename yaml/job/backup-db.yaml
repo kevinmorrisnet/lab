@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backup-db
+spec:
+  template:
+    spec:
+      containers:
+      - image: mysql:8.0
+        name: backup-db
+        command: ["sh", "-c", "mysqldump -u root dbname > /backup/dump.sql"]
+      restartPolicy: OnFailure

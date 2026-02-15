@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: email-batch
+spec:
+  completions: 20
+  parallelism: 4
+  template:
+    spec:
+      containers:
+      - image: python:3.9
+        name: email-batch
+        command: ["sh", "-c", "python send_emails.py --batch-size=100"]
+      restartPolicy: Never

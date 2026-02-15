@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: report-generator
+spec:
+  template:
+    spec:
+      containers:
+      - image: node:16
+        name: report-generator
+        command: ["sh", "-c", "node generate.js && cp report.pdf /output/"]
+      restartPolicy: OnFailure

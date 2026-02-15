@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: data-processor
+spec:
+  completions: 5
+  parallelism: 2
+  template:
+    spec:
+      containers:
+      - image: busybox
+        name: data-processor
+        command: ["echo","processing"]
+      restartPolicy: Never
+

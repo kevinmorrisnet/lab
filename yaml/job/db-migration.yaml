@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+  namespace: production
+spec:
+  template:
+    spec:
+      containers:
+      - image: postgres:14
+        name: db-migration
+        command: ["sh", "-c", "psql -h db.prod.svc -U admin -d appdb -f /scripts/migrate.sql"]
+      restartPolicy: Never

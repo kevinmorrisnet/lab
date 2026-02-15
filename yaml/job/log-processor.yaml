@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: log-processor
+spec:
+  template:
+    spec:
+      containers:
+      - image: alpine
+        name: log-processor
+        command: ["sh", "-c", "cat /logs/app.log | grep ERROR | wc -l"]
+      restartPolicy: Never

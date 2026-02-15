@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: image-resize
+spec:
+  completions: 100
+  parallelism: 10
+  backoffLimit: 3
+  template:
+    spec:
+      containers:
+      - image: imagemagick:latest
+        name: image-resize
+        command: ["sh", "-c", "convert /input/*.jpg -resize 50% /output/"]
+      restartPolicy: OnFailure

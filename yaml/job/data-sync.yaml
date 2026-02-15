@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: data-sync
+spec:
+  completions: 5
+  parallelism: 5
+  template:
+    spec:
+      containers:
+      - image: busybox
+        name: data-sync
+        command: ["sh", "-c", "wget https://api.example.com/data.json -O /tmp/data.json"]
+      restartPolicy: Never
