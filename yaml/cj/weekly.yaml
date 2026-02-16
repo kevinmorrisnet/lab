@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: weekly-report
+  namespace: reporting
+spec:
+  schedule: "0 3 * * 0"
+  jobTemplate:
+    spec:
+      completions: 1
+      parallelism: 1
+      template:
+        spec:
+          containers:
+          - image: python:3.9
+            name: hourly-cleanup
+            command: ["sh", "-c", "python generate_report.py --weekly"]
+          restartPolicy: OnFailure

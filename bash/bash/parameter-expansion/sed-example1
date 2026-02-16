@@ -1,2 +1,0 @@
-$ filename="document.txt" | sed 's/.txt//') && echo $filename
-

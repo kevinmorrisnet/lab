@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nightly-sync
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      completions: 1
+      backoffLimit: 2
+      template:
+        spec:
+          containers:
+          - image: rsync:latest
+            name: nightly-sync
+            command: ["sh", "-c", "rsync -av /source/ /backup/"]
+          restartPolicy: OnFailure
