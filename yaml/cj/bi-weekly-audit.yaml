@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: bi-weekly-audit
+  namespace: compliance
+spec:
+  schedule: "0 9 1-7,15-21 * 1"
+  jobTemplate:
+    spec:
+      completions: 1
+      activeDeadlineSeconds: 3600
+      template:
+        spec:
+          containers:
+          - image: audit:v2
+            name: bi-weekly-audit
+            command: ["sh", "-c", "./audit.sh --full-scan"]
+          restartPolicy: Never
+

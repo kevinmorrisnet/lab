@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: weekend-maintenance
+spec:
+  schedule: "0 4 * * 0,6"
+  jobTemplate:
+    spec:
+      completions: 1
+      activeDeadlineSeconds: 7200
+      template:
+        spec:
+          containers:
+          - image: maintenance:latest
+            name: weekend-maintenance
+            command: ["sh", "-c", "./cleanup.sh && ./optimize.sh"]
+          restartPolicy: OnFailure

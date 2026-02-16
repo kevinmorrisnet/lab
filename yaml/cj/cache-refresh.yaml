@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cache-refresh
+  namespace: cache-system
+spec:
+  schedule: "*/30 * * * *"
+  jobTemplate:
+    spec:
+      completions: 1
+      backoffLimit: 3
+      template:
+        spec:
+          containers:
+          - image: redis:7
+            name: cache-refresh
+            command: ["redis-cli", "FLUSHDB"]
+          restartPolicy: Never

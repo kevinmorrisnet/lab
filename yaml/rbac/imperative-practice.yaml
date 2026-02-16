@@ -1,0 +1,19 @@
+k create role pod-manager -n dev --verb get,list,create --resource pods
+
+k create rolebinding dev-pods -n dev --role pod-manager --user alice
+
+k create clusterrole secret-reader --verb get,list --resource secrets -n
+
+k create clusterrolebinding secret-access --clusterrole secret-reader --serviceaccount production:app-sa
+
+k create role deploy-admin -n staging --verb "*" --resource deployments
+
+k create rolebinding staging-deployers -n staging --role deploy-admin --group developers
+
+k create clusterrole node-viewer --verb get,list,watch --resource nodes
+
+k create rolebinding app-access -n apps --role pod-reader --serviceaccount apps:backend-sa
+
+k create clusterrole pv-manager --verb create,delete,patch --resource persistentvolumes
+
+k create clusterrolebinding cluster-admins --clusterrole cluster-admin --group admins

@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: monthly-invoice
+spec:
+  schedule: "0 8 1 * *"
+  jobTemplate:
+    spec:
+      completions: 1
+      parallelism: 1
+      ttlSecondsAfterFinished: 86400
+      template:
+        spec:
+          containers:
+          - image: billing:v3
+            name: monthly-invoice
+            command: ["sh", "-c", "python generate_invoices.py | sendmail finance@company.com"]
+          restartPolicy: OnFailure
+
