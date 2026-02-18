@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: storefront-svc
+  namespace: retail
+spec:
+  type: LoadBalancer
+  selector:
+    app: storefront
+  ports:
+  - port: 80
+    targetPort: 5000

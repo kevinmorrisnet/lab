@@ -1,0 +1,1 @@
+k expose deploy webapp --name webapp-svc --port 80 --target-port 8080 -n stagin
