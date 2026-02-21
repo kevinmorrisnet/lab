@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-tolerate
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+  tolerations:
+  - key: env
+    operator: Equal
+    value: prod
+    effect: NoSchedule
+  - key: tier
+    operator: Equal
+    value: frontend
+    effect: NoExecute

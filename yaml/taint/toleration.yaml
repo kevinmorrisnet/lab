@@ -1,0 +1,6 @@
+spec:
+  tolerations:
+  - key: tier
+    operator: Equal
+    value: frontend
+    effect: NoSchedule
