@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name:  pod-cm
+spec:
+  securityContext:
+    runAsUser: 1000
+    fsGroup: 2000
+  containers:
+  - image: nginx
+    name: pod-cm
+    securityContext:
+      capabilities:
+        drop:
+        - SYS_TIMEs
+      allowPrivilegeEscalation: false
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    startupProbe:
+      httpGet:
+        path: /
+        port: 80

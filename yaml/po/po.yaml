@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-pod
+spec:
+  initContainers:
+  - image: busybox
+    name: init-busy
+    command: ["sh", "-c", "wget -O- google.com"]
+  - image: busybox
+    name: write
+    command: ["sh", "-c", "touch /data/file"]
+  containers:
+  - image: nginx
+    name: init-nginx
+

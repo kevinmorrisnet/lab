@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-app
+  annotations:
+    description: my-app
+spec:
+  nodeName: controlplane
+  containers:
+  - image: nginx
+    name: nginx
