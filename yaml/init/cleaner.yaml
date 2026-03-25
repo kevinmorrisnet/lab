@@ -24,13 +24,6 @@ spec:
         volumeMounts:
         - name: logs
           mountPath: /var/log/cleaner
-      - name: logger-con                                                # add
-        image: busybox:1.31.0                                           # add
-        restartPolicy: Always                                           # add
-        command: ["sh", "-c", "tail -f /var/log/cleaner/cleaner.log"]   # add
-        volumeMounts:                                                   # add
-        - name: logs                                                    # add
-          mountPath: /var/log/cleaner                                   # add
       containers:
       - name: cleaner-con
         image: bash:5.0.11
