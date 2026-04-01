@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: main
+spec:
+  initContainers:
+  - image: busybox
+    name: logger
+    command: ["sh", "-c", "tail -f /var/log/app.log"]
+    restartPolicy: Always
+    volumeMounts:
+    - name: logs
+      mountPath: /var/log
+  containers:
+  - image: nginx
+    name: main
+    volumeMounts:
+    - name: logs
+      mountPath: /var/log
+  volumes:
+  - name: logs
+    emptyDir: {}
+

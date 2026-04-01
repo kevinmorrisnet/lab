@@ -1,0 +1,26 @@
+k -n prod expose deploy web --name web-svc --port 80 --target-port 8080
+
+
+initContainers:
+- name: logger
+  image: busybox:1.31.0
+  command: ["sh", "-c", "tail -f /var/log/app/app.log"]
+
+spec:
+  podSelector:
+    matchLabels:
+      app: frontend
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    podSelector:
+      matchLabels:
+        app: api
+    ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53
+
+

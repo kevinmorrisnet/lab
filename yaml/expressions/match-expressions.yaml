@@ -1,0 +1,6 @@
+matchExpressions:
+- key: env
+  operator: In
+  values:
+  - prod
+  - staging

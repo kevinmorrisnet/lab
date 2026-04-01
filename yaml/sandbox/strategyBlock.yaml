@@ -1,0 +1,35 @@
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 3
+
+
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    command: ["sleep"]
+    args: ["3600"]
+
+env:
+- name: APP_COLOR
+  value: blue
+
+env:
+- name: APP_COLOR
+  valueFrom:
+    configMapKeyRef:
+      name: app-config
+      key: color
+
+  envFrom:
+  - configMapRef:
+      name: app-config
+
+securityContext:
+  runAsUser: 1000
+  capabilities:
+    drop:
+    - NET_ADMIN

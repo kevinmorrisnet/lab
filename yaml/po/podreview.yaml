@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sleeper
+spec:
+  containers:
+  - image: ubuntu
+    name: sleeper
+    command: ["sleep", "7200"]

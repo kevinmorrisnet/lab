@@ -7,13 +7,41 @@ spec:
   - image: postgres:13
     name: db-pod
     env:
-    - name: PGDATA
-      value: /var/lib/postgresql/data/pgdata
-    volumeMounts:
-    - name: db-data
-      mountPath: /var/lib/postgresql/data
+    - name: APP_ENV
+      value: production
+    - name: DB_PORT
+      value: "5432"
   volumes:
   - name: db-data
     persistentVolumeClaim:
-      claimName: db-data
+      claimName: dbA
 
+
+env:
+- name: DB_PASSWORD
+  valueFrom:
+    secretKeyRef:
+      name: db-secret
+      key: DB_PASSWORD
+
+envFrom:
+- configMapRef:
+    name: app-config
+
+
+
+  volumeMounts:
+  - name: config-vol
+    mountPath: /etc/config
+volumes:
+- name: config-vol
+  configMap:
+    name: app-config
+
+  volumeMounts:
+  - name: secret-vol
+    mountPath: /etc/secret
+volumes:
+- name: secret-vol
+  secret:
+    secretName: app-secret

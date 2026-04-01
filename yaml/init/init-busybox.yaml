@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-pod
+spec:
+  initContainers:
+  - image: busybox
+    name: init
+    command: ["sleep", "5"]
+    volumeMounts:
+    - name: shared-vol
+      mountPath: /work-dir
+  containers:
+  - image: nginx
+    name: main
+    volumeMounts:
+    - name: shared-vol
+      mountPath: /work-dir
+  volumes:
+  - name: shared-vol
+    emptyDir: {}

@@ -1,0 +1,5 @@
+tolerations:
+- kind: 
+  operator:
+  value:
+  expressions:

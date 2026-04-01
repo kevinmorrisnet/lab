@@ -1,0 +1,5 @@
+tolerations:
+- key: spot
+  operator: Equal
+  value: true
+  effect: PreferNoSchedule

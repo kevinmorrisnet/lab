@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io
+kind: NetworkPolicy
+metadata:
+  name:
+spec:
+  podSelector:
+    matchLabels:
+      app: frontend
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    podSelector:
+      matchLabels:
+        app: api
+    ports:
+    - protocol: DNS
+      port: 53
+
