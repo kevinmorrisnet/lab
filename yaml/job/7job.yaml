@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: liza
+  namespace: her-apt
+  labels:
+    light: hallway
+    pictures: wall
+spec:
+  completions: 3
+  template:
+    spec:
+      containers:
+      - image: brasileira:1.0.0
+        name: britto-pain-in-the-ass-ereira
+        command: ["papi", "now"]
+      restartPolicy: Always

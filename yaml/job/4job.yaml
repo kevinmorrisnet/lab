@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: report-job
+  namespace: staging
+  labels:
+    app: reporter
+spec:
+  completions: 6
+  parallelism: 2
+  template:
+    spec:
+      containers:
+      - image: busybox
+        name: reporter
+        command: ["echo", "report"]
+      restartPolicy: Never

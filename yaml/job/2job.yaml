@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: data-job
+  namespace: neptune
+  labels:
+    id: data
+spec:
+  completions: 3
+  parallelism: 2
+  template:
+    spec:
+      containers:
+      - image: busybox:1.31.0
+        name: data-job
+        command: ["sh", "-c", "sleep 2 && echo done"]
+      restartPolicy: Never

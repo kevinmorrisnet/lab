@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: audit-cron
+  namespace: prod
+spec:
+  schedule: "0 */2 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - image: busybox:1.35
+            name: auditor
+            command: ["sh", "-c", "echo audit"]
+          restartPolicy: Never
+

@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: test-job
+  namespace: qa
+  labels:
+    env: qa
+spec:
+  completions: 4
+  parallelism: 4
+  template:
+    spec:
+      containers:
+      - image: alpine
+        name: tester
+        command: ["echo", "test"]
+      restartPolicy: Never

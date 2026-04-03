@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cleanup-job
+  namespace: default
+  labels:
+    tier: batch
+spec:
+  template:
+    spec:
+      containers:
+      - image: alpine:3.18
+        name: cleanup-job
+        command: ["echo", "cleanup"]
+      restartPolicy: Never

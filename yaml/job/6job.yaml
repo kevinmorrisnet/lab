@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: audit-job
+  namespace: prod
+  labels:
+    id: audit
+spec:
+  completions: 2
+  template:
+    spec:
+      containers:
+      - image: busybox:1.35
+        name: auditor
+        command: ["sh", "-c", "echo audit && sleep 1"]
+      restartPolicy: Never
+

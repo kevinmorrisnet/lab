@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: report-cron
+  namespace: staging
+  labels:
+    tier: cron
+spec:
+  schedule: "0 6 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - image: alpine:3.18
+            name: reporter
+            command: ["echo", "report"]
+          restartPolicy: Never

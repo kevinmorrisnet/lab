@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-cron
+  labels:
+    app: backup
+  namespace: prod
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - image: alpine
+            name: backup
+            command: ["echo", "backup"]
+          restartPolicy: Never
+
+
