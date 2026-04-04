@@ -7,5 +7,5 @@ parameters:
   fsType: ext4
   type: gp3
 reclaimPolicy: Retain
-volumeBindingMode: WaitforFirstConsumele
+volumeBindingMode: WaitforFirstConsumer
 allowVolumeExpansion: true

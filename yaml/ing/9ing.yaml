@@ -1,0 +1,37 @@
+apiversion: networking.k8s.io
+kind: Ingress
+metadata:
+  name: ingress-tls-two-hostCert
+  namespace: default
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - api.example.com
+    secretName: api-tls
+  - hosts:
+    - web.example.com
+    secretName: web-tls
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-svc
+            port:
+              number: 80
+  - host: web.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-svc
+            port:
+              number: 80
+
+

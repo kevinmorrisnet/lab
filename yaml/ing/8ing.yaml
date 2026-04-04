@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-tls-single
+  namespace: default
+spec:
+  tls:
+  - hosts:
+    - secure.example.com
+    secretName: secure-cert
+  rules:
+  - host: secure.example.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-svc
+            port:
+              number: 8080

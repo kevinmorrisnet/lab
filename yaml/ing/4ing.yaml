@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-test
+  namespace: staging
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /shop
+        pathType: Prefix
+        backend:
+          service:
+            name: shop-svc
+            port:
+              number: 3000
+      - path: /admin
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-svc
+            port:
+              number: 9000
