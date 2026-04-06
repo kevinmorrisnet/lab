@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-report
+  namespace: finance
+spec:
+  completions: 4
+  parallelism: 2
+  template:
+    spec:
+      containers:
+      - image: busybox:1.31
+        name: busybox
+        command: ["sh", "-c", "echo report done"]
+      restartPolicy: Never

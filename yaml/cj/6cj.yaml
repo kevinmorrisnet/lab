@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cleanup
+  namespace: ops
+spec:
+  schedule: "0 2 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - image: busybox:1.35
+            name: busybox
+            command: ["sh", "-c", "rm -rf /tmp/cache"]
+          restartPolicy: Never

@@ -1,38 +1,35 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  labels:
+    app: postgres
   name: postgres
+  namespace: data
 spec:
-  serviceName: postgres-svc
-  replicas: 2
+  serviceName: postgres-headless
+  replicas: 3
   selector:
     matchLabels:
-      app: db
+      app: postgres
   template:
     metadata:
       labels:
-        app: db
+        app: postgres
     spec:
       containers:
-      - image: postgres:15
-        name: db
-        ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_PASSWORD
-          value: secret123
+      - image: postgres:14
+        name: postgres
         volumeMounts:
-        - name: pgdata
+        - name: postgres-data
           mountPath: /var/lib/postgresql/data
   volumeClaimTemplates:
-  - metadata:
-      name: pgdata
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 10Gi
-      storageClassName: local-storage
-
+    - metadata:
+        name: postgres-data
+      spec:
+        resources:
+          requests:
+            storage: 5Gi
+        accessModes:
+        - ReadWriteOnce
+        storageClassName: standard
 
