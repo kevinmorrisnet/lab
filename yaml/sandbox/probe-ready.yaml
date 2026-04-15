@@ -1,5 +1,0 @@
-readinessProbe:
-  httpGet:
-    path: /health
-    port: 8080
-  periodSeconds: 5
