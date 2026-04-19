@@ -1,0 +1,7 @@
+apiVersion: factory.io/v1
+kind: Widget
+metadata:
+  name: my-widget
+spec:
+  color: blue
+  quantity: 5
