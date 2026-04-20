@@ -1,0 +1,7 @@
+apiVersion: monitoring.io/v1
+kind: Alert
+metadata:
+  name: high-cpu
+spec:
+  severity: critical
+  threshold: 90

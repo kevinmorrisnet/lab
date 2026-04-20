@@ -1,0 +1,7 @@
+apiVersion: food.example.com/v1
+kind: Pizza
+metadata:
+  name: margherita
+spec:
+  toppings: "mozzarella,basil"
+  size: "large"

@@ -1,0 +1,8 @@
+apiVersion: data.corp.io/v1
+kind: Database
+metadata:
+  name: postgres-main
+  namespace: sandbox
+spec:
+  engine: postgres
+  replicas: 3
