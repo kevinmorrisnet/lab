@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backup
+spec:
+  template:
+    metadata: {}
+    spec:
+      containers:
+      - command:
+        - echo
+        - done
+        image: busybox
+        name: backup
+        resources: {}
+      restartPolicy: Never
+status: {}

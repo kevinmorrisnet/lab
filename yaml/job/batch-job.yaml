@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-process
+  namespace: default
+spec:
+  completions: 5
+  parallelism: 2
+  backoffLimit: 3
+  template:
+    spec:
+      containers:
+      - command:
+        - echo
+        - processing
+        image: busybox
+        name: batch-process
+      restartPolicy: Never

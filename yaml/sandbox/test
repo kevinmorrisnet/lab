@@ -1,0 +1,6 @@
+env:
+- name: SECRET_USERNAME
+	valueFrom:
+		secretKeyRef:
+			name: backend-user
+			key: backend-usernam
