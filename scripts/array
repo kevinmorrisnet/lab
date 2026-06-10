@@ -1,0 +1,5 @@
+#! /bin/bash
+my_arr=(1 2 3 4 5)
+for item in $my_arr[@]; do
+  echo $item
+done

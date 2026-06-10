@@ -1,18 +1,21 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: web-hpa
+  name: kkapp-hpa
 spec:
   maxReplicas: 10
-  metrics:
+  metrics: 
   - resource:
       name: cpu
       target:
-        averageUtilization: 60
+        averageUtilization: 50
         type: Utilization
     type: Resource
   minReplicas: 2
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: web
+    name: kkapp-deploy
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300

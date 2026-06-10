@@ -1,0 +1,16 @@
+#! /bin/bash
+set -euo pipefail
+
+read -p "Pod name? : " podname
+read -p "Namespace? : " namespace
+
+while true; do
+  status=$(kubectl get pods --field-selector=metadata.name=$podname -n $namespace --no-headers -o custom-columns=":status.phase")
+  if [[ "$status" == "Running" ]]; then
+    break
+  else
+    echo "waiting for pod $podname to get into a running state."
+    sleep 1
+  fi
+done
+echo "$podname is running"

@@ -1,0 +1,20 @@
+GROUP:      traefik.io
+KIND:       TLSOption
+VERSION:    v1alpha1
+
+FIELD: clientAuth <Object>
+
+
+DESCRIPTION:
+    ClientAuth defines the server's policy for TLS Client Authentication.
+    
+FIELDS:
+  clientAuthType	<string>
+  enum: NoClientCert, RequestClientCert, RequireAnyClientCert, VerifyClientCertIfGiven, ....
+    ClientAuthType defines the client authentication type to apply.
+
+  secretNames	<[]string>
+    SecretNames defines the names of the referenced Kubernetes Secret storing
+    certificate details.
+
+

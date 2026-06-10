@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: control-plane-pod
+spec:
+  nodeName: control-plane
+  containers:
+  - image: nginx
+    name: control-plane-pod
+  tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule

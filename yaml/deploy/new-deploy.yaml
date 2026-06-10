@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-max
+  name: nginx-max
+  namespace: sandbox
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-max
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: nginx-max
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources:
+          limits:
+            cpu: 3500m
+            memory: 7Gi
+          requests:
+            cpu: 3500m
+            memory: 7Gi
+
