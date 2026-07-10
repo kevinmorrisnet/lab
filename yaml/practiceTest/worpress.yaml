@@ -1,0 +1,16 @@
+containers:
+- name: sidecar
+  image: busybox:stable
+  command: ["bin/sh", "-c", "tail -f /var/log/wordpress.log"]
+  volumeMounts:
+  - name: log
+    mountPath: /var/log
+- name: main
+  image: nginx:alpine
+  volumeMounts:
+  - name: log
+    mountPath: /var/log
+volumes:
+- name: log
+  emptyDir: {}
+

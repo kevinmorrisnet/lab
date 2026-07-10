@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: media-route
+  namespace: media
+spec:
+  parentRefs:
+  - name: media-gateway
+  hostnames:
+  - media.local
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: video-svc
+      port: 9000

@@ -1,0 +1,9 @@
+ports:
+- containerPort: 80
+  protocol: TCP
+  name: http
+
+k expose nodeport-deployment --name nodeport-service --port 80 --type NodePort:wq
+
+
+

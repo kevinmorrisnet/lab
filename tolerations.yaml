@@ -1,0 +1,5 @@
+tolerations:
+- key: IT
+  operator: Equal
+  value: Kiddie
+  effect: NoSchedule
