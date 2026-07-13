@@ -1,0 +1,12 @@
+
+spec:
+  template:
+    spec:
+      containers:
+      - name: app
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+

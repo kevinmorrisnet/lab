@@ -1,0 +1,15 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: deny-egress
+  namespace: team-iris
+spec:
+  endpointSelector:
+    matchLabels:
+      type: messenger
+  egressDeny:
+  - toEndpoints:
+    - matchLabels:
+        type: database
+    authentication:
+      mode: "required"

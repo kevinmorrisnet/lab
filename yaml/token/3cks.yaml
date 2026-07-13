@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    volumeMounts:
+    - mountPath: /var/run/secrets/tokens
+      name: vault-token
+  serviceAccountName: build-robot
+  volumes:
+  - name: vault-token
+    projected:
+      sources:
+      - serviceAccountToken:
+          path: vault-token
+          expirationSeconds: 7200
+          audience: vault
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sa-token
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sa-deploy
+  namespace: sa-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sa-deploy
+  template:
+    metadata:
+      labels:
+        app: sa-deploy
+    spec:
+      serviceAccountName: sa-token
+      containers:
+      - name: app
+        image: nginx
+        volumeMounts:
+        - mountPath: /var/run/secrets
+          name: vault-token
+          readOnly: true
+    volumes:
+    - name: vault-token
+      projected:
+        sources:
+        - serviceAccountToken:
+            path: token
+            expirationSeconds: 7200
+            audience: vault
+
+
