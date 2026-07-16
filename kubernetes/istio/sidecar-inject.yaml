@@ -1,0 +1,9 @@
+
+check --enable-admission-plugins=MutatingAdmissionWebhook
+
+k label ns team-mesh istio-injection=enabled
+
+k get deploy -n team-mesh
+
+k rollout restart deploy -n team-mesh deploy-mesh
+

@@ -1,0 +1,38 @@
+apiVersion: audit.k8s.io/v1 # This is required.
+kind: Policy
+rules:
+  - level: RequestResponse
+    resources:
+    - group: ""
+      resources: ["pods", "services"]
+  - level: None
+    resources:
+    - group: ""
+      resources: ["secrets"]
+    namespaces: ["kube-system"]
+  - level: Request
+    resources:
+    - group: "apps"
+      resources: ["deployments"]
+  - level: Metadata
+---
+--audit-policy-file=/etc/kubernetes/audit/policy/audit-policy.yaml
+--audit-log-path=/etc/kubernetes/audit/log/audit.log
+volumeMounts:
+  - mountPath: /etc/kubernetes/audit/policy/audit-policy.yaml
+    name: audit
+    readOnly: true
+  - mountPath: /etc/kubernetes/audit/log/audit.log
+    name: audit-log
+    readOnly: false
+
+volumes:
+- name: audit
+  hostPath:
+    path: /etc/kubernetes/audit/policy
+    type: DirectoryOrCreate
+
+- name: audit-log
+  hostPath:
+    path: /etc/kubernetes/audit/log
+    type: DirectoryOrCreate

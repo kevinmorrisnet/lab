@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-red
+  namespace: team-red
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-red
+  template:
+    metadata:
+      labels:
+        app: deploy-red
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: app
+        image: nginx
+        securityContext:
+          capabilities:
+            drop: ["ALL"]
+          allowPrivilegeEscalation: false 
