@@ -1,4 +1,0 @@
-filepath="/home/user/document.txt"
-echo "${filepath#*/}"
-
-
